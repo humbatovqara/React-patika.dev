@@ -3,6 +3,7 @@ import './App.css';
 // import Header from './components/Header';
 
 const name = "Qara";
+
 const surname = "Humbatov";
 const isLoggedIn = true;
 
