@@ -1,15 +1,13 @@
 import PropTypes from "prop-types";
 
-function User({name, surname, age, isLoggedIn, friends}) {
+function User({name, surname, age, isLoggedIn, friends, address}) {
+    if(!isLoggedIn) {
+        return <div>Giriş edilmədi</div>
+    }
+    
     return (
         <>
-            <h1> 
-                {
-                    isLoggedIn 
-                        ? `Salam, ${surname} ${name} : ${age}` 
-                        : "Giriş edilmədi"
-                } 
-            </h1>
+            <h1> {`Salam, ${surname} ${name} : ${age}`}</h1>
 
             {/* {
                 friends.map((friend) => {
@@ -24,6 +22,8 @@ function User({name, surname, age, isLoggedIn, friends}) {
                     <div key={friend.id}>{friend.name}</div>
                 ))
             }
+            <hr />
+            {address.title} {address.zip}
         </>
     )
 }
@@ -33,7 +33,16 @@ User.propTypes = {
     surname: PropTypes.string.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
     age: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    friends: PropTypes.array
+    friends: PropTypes.array,
+    address: PropTypes.shape({
+        title: PropTypes.string,
+        zip: PropTypes.number
+    })
+}
+
+User.defaultProps = {
+    name: "No name",
+    isLoggedIn: false
 }
 
 export default User;
