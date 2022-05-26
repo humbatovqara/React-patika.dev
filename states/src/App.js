@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { Formik, Field, Form } from 'formik';
+import { useFormik } from 'formik';
 
 function App() {
   /*
@@ -8,6 +8,20 @@ function App() {
   const [friends, setFriends] = useState(['Nurlan', 'Ulvi']);
   const [address, setAddress] = useState({ title: "Baku", zip: 12345 });
   */
+
+  const { handleSubmit, handleChange, values } = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      gender: 'male',
+      hobbies: [],
+      country: "Turkey"
+    },
+    onSubmit: values => {
+      console.log(JSON.stringify(values, null, 2));
+    },
+  });
 
 
   return (
@@ -38,36 +52,66 @@ function App() {
 
       <div>
         <h1>Sign Up</h1>
-        <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-          }}
-          onSubmit={async (values) => {
-            await new Promise((r) => setTimeout(r, 500));
-            alert(JSON.stringify(values, null, 2));
-          }}
-        >
-          <Form>
-            <label htmlFor="firstName">First Name</label>
-            <Field id="firstName" name="firstName" placeholder="Jane" />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="firstName">First Name</label>
+          <input name="firstName" value={values.firstName} onChange={handleChange} placeholder="Jane" />
 
-            <label htmlFor="lastName">Last Name</label>
-            <Field id="lastName" name="lastName" placeholder="Doe" />
+          <label htmlFor="lastName">Last Name</label>
+          <input name="lastName" value={values.lastName} onChange={handleChange} placeholder="Doe" />
 
-            <label htmlFor="email">Email</label>
-            <Field
-              id="email"
-              name="email"
-              placeholder="jane@acme.com"
-              type="email"
-            />
-            <button type="submit">Submit</button>
-          </Form>
-        </Formik>
+          <label htmlFor="email">Email</label>
+          <input
+            onChange={handleChange}
+            name="email"
+            placeholder="jane@acme.com"
+            type="email"
+            value={values.email}
+          />
+
+          <br /><br />
+
+          <span>Male</span>
+          <input checked={values.gender === "male"} type="radio" value="male" name="gender" onChange={handleChange} placeholder="Doe" />
+
+          <span>Female</span>
+          <input checked={values.gender === "female"} type="radio" value="female" name="gender" onChange={handleChange} placeholder="Doe" />
+
+          <br /><br />
+
+          <div>
+            Play Football
+            <input onChange={handleChange} type="checkbox" name="hobbies" value="Football" />
+          </div>
+
+          <div>
+            Watch Film
+            <input onChange={handleChange} type="checkbox" name="hobbies" value="Film" />
+          </div>
+
+          <div>
+            Photography
+            <input onChange={handleChange} type="checkbox" name="hobbies" value="Photography" />
+          </div>
+
+          <br /><br />
+
+          <select name="country" onChange={handleChange} value={values.country}>
+            <option value="turkey">Turkey</option>
+            <option value="england">England</option>
+            <option value="usa">USA</option>
+          </select>
+
+          <br /><br />
+
+          <button type="submit">Submit</button>
+
+          <br /><br />
+
+          {JSON.stringify(values)}
+
+        </form>
       </div>
-    </div>
+    </div >
 
   );
 
