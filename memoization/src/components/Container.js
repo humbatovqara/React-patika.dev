@@ -3,6 +3,7 @@ import ThemeContext from '../context/ThemeContext'
 
 import Button from './Button'
 import Footer from './Footer'
+import Profile from './Profile';
 
 function Container() {
     const { theme } = useContext(ThemeContext);
@@ -14,6 +15,8 @@ function Container() {
             <Button />
             <hr />
             <Footer />
+            <hr />
+            <Profile />
         </div>
     )
 }
