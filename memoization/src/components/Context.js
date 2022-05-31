@@ -1,16 +1,13 @@
 import React from 'react'
 import '../App.css'
 import { ThemeProvider } from '../context/ThemeContext'
-import Button from './Button'
-import Footer from './Footer'
+import Container from './Container'
 
 function Context() {
     return (
         <div className='App'>
             <ThemeProvider>
-                <Button />
-                <hr />
-                <Footer />
+                <Container />
             </ThemeProvider>
         </div >
     )
