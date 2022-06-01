@@ -1,12 +1,12 @@
-import { useContext } from 'react'
-import ThemeContext from '../context/ThemeContext'
+// import { useContext } from 'react'
+import { useTheme } from '../context/ThemeContext'
 
 import Button from './Button'
 import Footer from './Footer'
 import Profile from './Profile';
 
 function Container() {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useTheme();
 
     console.log(theme);
 
